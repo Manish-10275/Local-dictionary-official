@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Officials</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="bg-success text-white text-center py-3">
+        <h1>Search for Local Officials</h1>
+        <nav>
+            <a class="text-white mx-2" href="/">Home</a>
+            <a class="text-white mx-2" href="/search">Search Officials</a>
+            <a class="text-white mx-2" href="/contribute">Contribute Information</a>
+            <a class="text-white mx-2" href="/about">About</a>
+        </nav>
+    </header>
+    <main class="container mt-4">
+        <form method="POST" class="mb-4">
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" class="form-control" id="state" name="state" required>
+            </div>
+            <div class="form-group">
+                <label for="district">District:</label>
+                <input type="text" class="form-control" id="district" name="district" required>
+            </div>
+            <div class="form-group">
+                <label for="block">Block:</label>
+                <input type="text" class="form-control" id="block" name="block" required>
+            </div>
+            <button type="submit" class="btn btn-success">Search</button>
+        </form>
+
+        <h2>Results:</h2>
+        <ul class="list-group">
+            {% for official in officials %}
+                <li class="list-group-item">{{ official['name'] }} - {{ official['position'] }} ({{ official['contact'] }})</li>
+            {% else %}
+                <li class="list-group-item">No officials found.</li>
+            {% endfor %}
+        </ul>
+    </main>
+</body>
+</html>
